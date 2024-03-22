@@ -123,7 +123,7 @@ COPY --from=build --chown=${USER}:${USER}	${PYTHON_DEPS_PATH} ${PYTHON_DEPS_PATH
 COPY --chown=${USER}:${USER} app ${PROJECT_PATH}
 USER ${USER}
 
-CMD [ "python3", "app/app.py" ]
+CMD [ "python3", "app.py" ]
 
 
 ##############################

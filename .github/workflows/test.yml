@@ -1,0 +1,20 @@
+name: Get Repository Name
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  get_repository_name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Repository Name
+        run: echo "Repository Name ${{ github.repository }}"
+      
+      - name: Extract Repository Name
+        id: extract_repo_name
+        run: echo "::set-output name=repo_name::$(basename ${{ github.repository }})"
+        
+      - name: Use Repository Name
+        run: echo "Repository Name ${{ steps.extract_repo_name.outputs.repo_name }}"

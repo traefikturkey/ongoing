@@ -8,10 +8,10 @@
             $('#expandForm').submit(function(event) {
                 event.preventDefault(); // Prevent default form submission
                 var userUrl = $('#urlInput').val(); // Get user input
-                $('#expandBtn').attr('disabled', true); // Disable button
+                $('#expandBtn').hide(); // Disable button
                 $('#spinner').show(); // Show spinner
                 $('#expandedUrl').empty(); // Clear previous result  
-                $('#screenshot').empty();
+                $('#screenshot').hide().empty();
                 $.ajax({
                     type: 'POST',
                     url: '/', // Flask route for URL expansion
@@ -22,11 +22,11 @@
                         // Append the image to the div with id "screenshot"
                         $('#screenshot').append(
                           $('<img>').attr('src', 'screenshot.png')
-                        );
+                        ).show();
                     },
                     complete: function() {
                         $('#spinner').hide(); // Hide spinner
-                        $('#expandBtn').attr('disabled', false); // Enable button
+                        $('#expandBtn').show(); // Enable button
                     }
                 });
             });
@@ -35,6 +35,11 @@
     <style>
         #spinner {
             display: none;
+        }
+        #screenshot
+        {
+          display: none;
+          border: 1px solid black;
         }
     </style>
 </head>
@@ -48,6 +53,6 @@
         </span>
     </form>
     <p id="expandedUrl">{{url}}</p>
-    <div id="screenshot"></div>
+    <p id="screenshot"></p>
 </body>
 </html>

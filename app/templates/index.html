@@ -10,13 +10,19 @@
                 var userUrl = $('#urlInput').val(); // Get user input
                 $('#expandBtn').attr('disabled', true); // Disable button
                 $('#spinner').show(); // Show spinner
-                $('#expandedUrl').text(''); // Clear previous result  
+                $('#expandedUrl').empty(); // Clear previous result  
+                $('#screenshot').empty();
                 $.ajax({
                     type: 'POST',
                     url: '/', // Flask route for URL expansion
                     data: { url: userUrl },
                     success: function(response) {
                         $('#expandedUrl').text(response); // Display expanded URL
+
+                        // Append the image to the div with id "screenshot"
+                        $('#screenshot').append(
+                          $('<img>').attr('src', 'screenshot.png')
+                        );
                     },
                     complete: function() {
                         $('#spinner').hide(); // Hide spinner
@@ -41,6 +47,7 @@
             <img src="spinner.gif" alt="Loading..." width="20" height="20">
         </span>
     </form>
-    <p id="expandedUrl">{{url}}</p> <!-- Display expanded URL here -->
+    <p id="expandedUrl">{{url}}</p>
+    <div id="screenshot"></div>
 </body>
 </html>

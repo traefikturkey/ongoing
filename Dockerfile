@@ -120,6 +120,7 @@ RUN pip3 install --upgrade pip && \
 FROM base as production
 
 COPY --from=build --chown=${USER}:${USER}	${PYTHON_DEPS_PATH} ${PYTHON_DEPS_PATH}
+COPY --chown=${USER}:${USER} app ${PROJECT_PATH}
 USER ${USER}
 
 CMD [ "python3", "app/app.py" ]

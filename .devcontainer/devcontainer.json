@@ -5,7 +5,7 @@
 	"containerEnv": {
 		"HOST_PROJECT_PATH": "${localWorkspaceFolder}",
     "PROJECT_NAME": "${localWorkspaceFolderBasename}",
-    "PROJECT_PATH": "${containerWorkspaceFolder}",
+    "PROJECT_PATH": "${containerWorkspaceFolder}"
 	},
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"build": { 
@@ -14,9 +14,7 @@
     "target": "devcontainer",
 		"args": {
       "PROJECT_NAME": "${localWorkspaceFolderBasename}",
-      "PROJECT_PATH": "${containerWorkspaceFolder}",
-			// "TZ": "${localEnv:TZ:America/New_York}",
-			// "TERM_SHELL": "${localEnv:TERM_SHELL:zsh}"
+      "PROJECT_PATH": "${containerWorkspaceFolder}"
 		}
 	},
   "updateContentCommand": "LC_ALL=C.UTF-8 ansible-playbook --inventory 127.0.0.1 --connection=local  ${containerWorkspaceFolder}/.devcontainer/ansible/setup-container.yml",

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Expander</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#expandForm').submit(function(event) {
+                event.preventDefault(); // Prevent default form submission
+                var userUrl = $('#urlInput').val(); // Get user input
+                $('#expandBtn').attr('disabled', true); // Disable button
+                $('#spinner').show(); // Show spinner
+                $('#expandedUrl').text(''); // Clear previous result  
+                $.ajax({
+                    type: 'POST',
+                    url: '/', // Flask route for URL expansion
+                    data: { url: userUrl },
+                    success: function(response) {
+                        $('#expandedUrl').text(response); // Display expanded URL
+                    },
+                    complete: function() {
+                        $('#spinner').hide(); // Hide spinner
+                        $('#expandBtn').attr('disabled', false); // Enable button
+                    }
+                });
+            });
+        });
+    </script>
+    <style>
+        #spinner {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>URL Expander</h1>
+    <form id="expandForm">
+        <input type="text" id="urlInput" placeholder="Enter a URL">
+        <button type="submit" id="expandBtn">Expand</button>
+        <span id="spinner"> <!-- Spinner to show while loading -->
+            <img src="spinner.gif" alt="Loading..." width="20" height="20">
+        </span>
+    </form>
+    <p id="expandedUrl">{{url}}</p> <!-- Display expanded URL here -->
+</body>
+</html>

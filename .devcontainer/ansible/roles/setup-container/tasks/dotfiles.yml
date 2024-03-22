@@ -1,0 +1,10 @@
+- name: Clone/Update Dotfiles Repository
+  git:
+    repo: "{{ dotfiles_url }}"
+    dest: "{{ dotfiles_path }}"
+    recursive: yes  # Recursively clone submodules
+    update: yes
+    accept_hostkey: yes
+
+- name: Execute {{ dotfiles_path }}/install
+  command: "{{ dotfiles_path }}/install"

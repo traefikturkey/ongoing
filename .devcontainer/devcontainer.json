@@ -1,0 +1,69 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/alpine
+{
+	"name": "${localWorkspaceFolderBasename}",
+	"containerEnv": {
+		"HOST_PROJECT_PATH": "${localWorkspaceFolder}",
+    "PROJECT_NAME": "${localWorkspaceFolderBasename}",
+    "PROJECT_PATH": "${containerWorkspaceFolder}",
+	},
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"build": { 
+		"context": "..",
+		"dockerfile": "../Dockerfile",
+		"args": {
+      "PROJECT_NAME": "${localWorkspaceFolderBasename}",
+      "PROJECT_PATH": "${containerWorkspaceFolder}",
+			// "TZ": "${localEnv:TZ:America/New_York}",
+			// "TERM_SHELL": "${localEnv:TERM_SHELL:zsh}"
+		}
+	},
+  "postAttachCommand": "ansible-playbook --inventory 127.0.0.1 --connection=local  /workspaces/${localWorkspaceFolderBasename}/.devcontainer/ansible/setup-container.yml",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"runArgs": ["--name", "${localWorkspaceFolderBasename}_devcontainer", "--hostname", "${localWorkspaceFolderBasename}","--env-file",".devcontainer/.env" ],
+	"mounts": [
+		"source=${localWorkspaceFolderBasename}-home,target=/home/anvil,type=volume",
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/anvil/.ssh,type=bind,consistency=cached",
+		"source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+	],
+
+	//Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"jeff-hykin.better-dockerfile-syntax",
+				"ms-azuretools.vscode-docker",
+				"ms-vsliveshare.vsliveshare",
+				"mikestead.dotenv",
+				"EditorConfig.EditorConfig",
+				"redhat.vscode-yaml",
+				"redhat.ansible"
+			],
+			"settings": {
+				"files.exclude": {
+					"**/.dotnet": true,
+					"**/.zcompdump": true
+				},
+				"dev.containers.copyGitConfig": false,
+				"dev.containers.gitCredentialHelperConfigLocation": "system",
+				"editor.tabSize": 2,
+				"files.readonlyFromPermissions": true,
+				"terminal.integrated.profiles.linux": {
+					"bash": {
+						"path": "/bin/bash",
+						"icon": "terminal-bash",
+						"args": ["-l"]
+					},
+					"zsh": {
+						"path": "/bin/zsh",
+						"icon": "terminal-linux",
+						"args": ["-l"]
+					}
+				},
+				"terminal.integrated.tabs.description": "",
+				"terminal.integrated.tabs.title": "${local}${separator}${cwdFolder}${separator}${process}",
+				"window.title": "${localWorkspaceFolderBasename}"
+			}
+		}
+	}
+}

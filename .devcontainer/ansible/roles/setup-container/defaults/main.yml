@@ -1,0 +1,2 @@
+dotfiles_url: "{{ lookup('env', 'DOTFILES_URL') | default('https://github.com/ilude/dotfiles.git') }}"
+dotfiles_path: "{{ lookup('env', 'HOME') + '/.dotfiles' }}"

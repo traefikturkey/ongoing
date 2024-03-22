@@ -5,7 +5,8 @@
 	"containerEnv": {
 		"HOST_PROJECT_PATH": "${localWorkspaceFolder}",
     "PROJECT_NAME": "${localWorkspaceFolderBasename}",
-    "PROJECT_PATH": "${containerWorkspaceFolder}"
+    "PROJECT_PATH": "${containerWorkspaceFolder}",
+    "FLASK_DEBUG": "True"
 	},
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"build": { 

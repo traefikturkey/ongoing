@@ -1,6 +1,7 @@
 import os
-from flask import Flask, render_template, request
 import requests
+from datetime import datetime
+from flask import Flask, render_template, request
 from selenium import webdriver
 
 app = Flask(__name__,
@@ -37,7 +38,7 @@ def index():
         url = expand_url(request.form.get('url'))
     else:
         url = 'https://shorturl.at/vSU17'
-    return render_template('index.html', url=url)
+    return render_template('index.html', url=url, current_year=datetime.now().year)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=os.environ.get("FLASK_DEBUG", "False"))

@@ -11,6 +11,7 @@
 	"build": { 
 		"context": "..",
 		"dockerfile": "../Dockerfile",
+    "target": "devcontainer",
 		"args": {
       "PROJECT_NAME": "${localWorkspaceFolderBasename}",
       "PROJECT_PATH": "${containerWorkspaceFolder}",
@@ -18,7 +19,7 @@
 			// "TERM_SHELL": "${localEnv:TERM_SHELL:zsh}"
 		}
 	},
-  "postAttachCommand": "ansible-playbook --inventory 127.0.0.1 --connection=local  /workspaces/${localWorkspaceFolderBasename}/.devcontainer/ansible/setup-container.yml",
+  "updateContentCommand": "LC_ALL=C.UTF-8 ansible-playbook --inventory 127.0.0.1 --connection=local  /workspaces/${localWorkspaceFolderBasename}/.devcontainer/ansible/setup-container.yml",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"runArgs": ["--name", "${localWorkspaceFolderBasename}_devcontainer", "--hostname", "${localWorkspaceFolderBasename}","--env-file",".devcontainer/.env" ],
 	"mounts": [

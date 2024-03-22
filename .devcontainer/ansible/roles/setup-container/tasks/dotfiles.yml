@@ -4,6 +4,7 @@
     dest: "{{ dotfiles_path }}"
     recursive: yes  # Recursively clone submodules
     update: yes
+    force: yes
     accept_hostkey: yes
 
 - name: Execute {{ dotfiles_path }}/install

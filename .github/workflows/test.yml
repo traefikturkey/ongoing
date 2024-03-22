@@ -1,0 +1,13 @@
+name: Get Repository Name
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  get_repository_name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Repository Name
+        run: echo "Repository Name: ${{ github.repository }}"

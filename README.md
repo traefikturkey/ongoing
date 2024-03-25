@@ -1,3 +1,5 @@
+[![Build and Publish Docker Image](https://github.com/traefikturkey/ongoing/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/traefikturkey/ongoing/actions/workflows/docker-publish.yml)
+
 ![image](https://github.com/traefikturkey/ongoing/assets/219478/00fef29e-3024-475b-b6b0-0c7fb0f2e983)
 
 Run:

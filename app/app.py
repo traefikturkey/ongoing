@@ -6,24 +6,22 @@ from selenium import webdriver
 
 app = Flask(__name__)
 
+# Create a headless browser instance
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+driver = webdriver.Chrome(options=options)
+
 def expand_url(url):
     try:
         url = requests.head(url, allow_redirects=True).url
 
-        # Create a headless browser instance
-        options = webdriver.ChromeOptions()
-        options.add_argument('--headless')
-        driver = webdriver.Chrome(options=options)
+        try:
+            # Take a screenshot of the page
+            driver.get(url)
+            driver.save_screenshot('app/static/screenshots/screenshot.png')
+        except Exception as e:
+            return f"Error taking screenshot: {str(e)}"
 
-        # Navigate to the URL
-        driver.get(url)
-
-        # Take a screenshot of the page
-        driver.save_screenshot('app/assets/screenshot.png')
-
-        # Close the browser
-        driver.quit()
-    
         return url
     except Exception as e:
         return f"Error expanding URL: {str(e)}"

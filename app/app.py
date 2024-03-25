@@ -6,15 +6,19 @@ from selenium import webdriver
 
 app = Flask(__name__)
 
-# Create a headless browser instance
-options = webdriver.ChromeOptions()
-options.add_argument('--no-sandbox')
-options.add_argument('--headless')
-options.add_argument('--disable-gpu')
-options.add_argument('--disable-dev-shm-usage')
-options.add_argument('--profile-directory=Default')
-options.add_argument('--user-data-dir=~/.config/google-chrome')
-driver = webdriver.Chrome(options=options)
+try:
+    os.makedirs('app/static/screenshots')
+    # Create a headless browser instance
+    options = webdriver.ChromeOptions()
+    options.add_argument('--no-sandbox')
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--profile-directory=Default')
+    options.add_argument('--user-data-dir=~/.config/google-chrome')
+    driver = webdriver.Chrome(options=options)
+except Exception as e:
+    print(f"Error creating headless browser: {str(e)}")
 
 def expand_url(url):
     try:

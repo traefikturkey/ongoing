@@ -12,10 +12,15 @@ ARG TZ=America/New_York
 ENV USER=${USER}
 ENV TZ=${TZ}
 
+ARG PROJECT_NAME
+ENV PROJECT_NAME=${PROJECT_NAME}
+
 ARG PROJECT_PATH=/app
 ENV PROJECT_PATH=${PROJECT_PATH}
+
 ENV PYTHON_DEPS_PATH=/dependencies
 ENV PYTHONPATH="${PYTHONPATH}:${PYTHON_DEPS_PATH}"
+ENV PYTHONUNBUFFERED=TRUE
 
 ENV LANGUAGE=en_US.UTF-8
 ENV LANG=en_US.UTF-8
@@ -155,9 +160,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN echo ${USER} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USER} && \
     chmod 0440 /etc/sudoers.d/${USER} 
-
-ARG PROJECT_NAME
-ENV PROJECT_NAME=${PROJECT_NAME}
 
 ENV DOTFILES_URL=https://github.com/ilude/dotfiles.git
 

@@ -2,4 +2,4 @@ flask
 requests
 selenium
 pillow
-waitress
+hypercorn

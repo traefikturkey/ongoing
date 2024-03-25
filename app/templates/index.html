@@ -7,27 +7,39 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <script>
         $(document).ready(function () {
-            $('#expandForm').submit(function (event) {
-                event.preventDefault();
-                var userUrl = $('#urlInput').val();
-                $('#expandBtn').prop('disabled', true);
-                $('#spinner').show();
-                $('#expandedUrl').empty();
-                $('#screenshot').hide().empty();
-                $.ajax({
-                    type: 'POST',
-                    url: '/',
-                    data: { url: userUrl },
-                    success: function (response) {
-                        $('#expandedUrl').append($('<a>').attr('href', response).text(response));
-                        $('#screenshot').append($('<a>').attr('href', response).append($('<img>').attr('src', "{{ url_for('static', filename='screenshots/screenshot.png') }}"))).show();
-                    },
-                    complete: function () {
-                        $('#spinner').hide();
-                        $('#expandBtn').prop('disabled', false);
-                    }
-                });
+          $('#expandForm').submit(function (event) {
+            event.preventDefault();
+            var userUrl = $('#urlInput').val();
+            $('#expandBtn').prop('disabled', true);
+            $('#spinner').show();
+            $('#expandedUrl').empty();
+            $('#screenshot').hide().empty();
+            $.ajax({
+              type: 'POST',
+              url: '/',
+              data: { url: userUrl },
+              success: function (response) {
+                $('#expandedUrl').append(
+                  $('<a>').attr('href', response).text(response)
+                ).show();
+                $('#screenshot').append(
+                  $('<a>').attr('href', response).append($('<img>').attr('src', 
+                    "{{ url_for('static', filename='screenshots/screenshot.png') }}"
+                  ))
+                ).show();
+              },
+              complete: function () {
+                $('#spinner').hide();
+                $('#expandBtn').prop('disabled', false);
+              }
             });
+          });
+          $('input').on('focus', function (e) {
+            $(this).one('mouseup', function () {
+              $(this).select();
+              return false;
+            }).select();
+          });
         });
     </script>
 </head>
@@ -42,7 +54,7 @@
                   <div class="card-body">
                       <form id="expandForm">
                           <div class="input-group mb-3">
-                              <input type="text" class="form-control" id="urlInput" value="{{ url }}" placeholder="Enter a URL" />
+                              <input type="text" class="form-control" id="urlInput" value="{{ url }}" placeholder="Enter a URL" onFocus="this.select()" autofocus />
                               <button type="submit" class="btn btn-primary" id="expandBtn">
                                   Expand
                               </button>

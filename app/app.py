@@ -43,7 +43,7 @@ def index():
 
 if __name__ == '__main__':
   port = int(os.environ.get("ONGOING_PORT", 9380))
-  print(f"Starting {os.environ.get('PROJECT_NAME').title()} server on port {port}")
+  print(f"Starting {os.environ.get('PROJECT_NAME', 'OnGoing').title()} server on port {port}")
   if os.environ.get("FLASK_DEBUG", "False") == "True":
     app.run(port=port, debug=True)
   else:

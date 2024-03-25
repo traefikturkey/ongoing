@@ -1,2 +1,5 @@
 .env
-assests/screenshot.png
+__pycache__/
+
+app/static/screenshots/*
+!app/static/screenshots/.keep

@@ -4,9 +4,7 @@ from datetime import datetime
 from flask import Flask, render_template, request
 from selenium import webdriver
 
-app = Flask(__name__,
-            static_url_path='', 
-            static_folder='assets')
+app = Flask(__name__)
 
 def expand_url(url):
     try:
@@ -41,4 +39,9 @@ def index():
     return render_template('index.html', url=url, current_year=datetime.now().year)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=os.environ.get("FLASK_DEBUG", "False"))
+  port = int(os.environ.get("ONGOING_PORT", 9380))
+  if os.environ.get("FLASK_DEBUG", "False") == "True":
+    app.run(port=port, debug=True)
+  else:
+    from waitress import serve
+    serve(app, host='0.0.0.0', port=port)

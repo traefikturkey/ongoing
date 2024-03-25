@@ -133,6 +133,7 @@ FROM build as devcontainer
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ansible \
+    dnsutils \
     exa \
     iproute2 \
     jq \

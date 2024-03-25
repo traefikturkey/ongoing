@@ -1,4 +1,4 @@
-- name: Clone/Update Dotfiles Repository
+- name: Clone/Update git repo {{ dotfiles_url }} to {{ dotfiles_path }}
   git:
     repo: "{{ dotfiles_url }}"
     dest: "{{ dotfiles_path }}"
@@ -6,6 +6,8 @@
     update: yes
     force: yes
     accept_hostkey: yes
+  ignore_errors: yes 
 
 - name: Execute {{ dotfiles_path }}/install
   command: "{{ dotfiles_path }}/install"
+  ignore_errors: yes 

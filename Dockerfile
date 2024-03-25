@@ -159,6 +159,8 @@ RUN echo ${USER} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USER} && \
 ARG PROJECT_NAME
 ENV PROJECT_NAME=${PROJECT_NAME}
 
+ENV DOTFILES_URL=https://github.com/ilude/dotfiles.git
+
 USER ${USER}
   
 # https://code.visualstudio.com/remote/advancedcontainers/start-processes#_adding-startup-commands-to-the-docker-image-instead

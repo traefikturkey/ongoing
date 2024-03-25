@@ -7,7 +7,6 @@ from selenium import webdriver
 app = Flask(__name__)
 
 try:
-    os.makedirs('app/static/screenshots')
     # Create a headless browser instance
     options = webdriver.ChromeOptions()
     options.add_argument('--no-sandbox')
@@ -15,7 +14,7 @@ try:
     options.add_argument('--disable-gpu')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--profile-directory=Default')
-    options.add_argument('--user-data-dir=~/.config/google-chrome')
+    options.add_argument('--user-data-dir=/tmp')
     driver = webdriver.Chrome(options=options)
 except Exception as e:
     print(f"Error creating headless browser: {str(e)}")

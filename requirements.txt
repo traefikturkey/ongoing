@@ -2,4 +2,4 @@ flask
 requests
 selenium
 pillow
-hypercorn
+hypercorn==0.15.0

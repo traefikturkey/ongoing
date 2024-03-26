@@ -84,3 +84,17 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          username: MafenBot
+          color: '#ff00aa'
+          avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
+          description: A new ${{ github.event.repository.name }} image ghcr.io/${{ github.repository }}:latest has been published
+          details: Based on ${{ github.event.head_commit.url }}
+          footer: MafenBot became self aware
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
